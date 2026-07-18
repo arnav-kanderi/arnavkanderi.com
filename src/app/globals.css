@@ -1,26 +1,153 @@
 @import "tailwindcss";
 
+/* Class-based dark mode: toggled via <html class="dark">, controlled by ThemeProvider */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light mode: crisp paper white, graphite ink, controlled signal red. */
+  --background: #f7f8fa;
+  --foreground: #111114;
+  --muted: #5f6068;
+  --accent: #111114;
+  --accent-foreground: #ffffff;
+  --glow-primary: #ffd8db;
+  --glow-secondary: #d71924;
+  --border: #1111141f;
+  --surface: #ffffff;
+}
+
+.dark {
+  /* Dark mode is the default experience. */
+  --background: #0d0d0f;
+  --foreground: #ffffff;
+  --muted: #a1a1a7;
+  --accent: #ffffff;
+  --accent-foreground: #080809;
+  --glow-primary: #580a10;
+  --glow-secondary: #ef3038;
+  --border: #f3f0ed1b;
+  --surface: #171719;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-surface: var(--surface);
+  --font-serif: var(--font-fraunces);
+  --font-sans: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  transition: background-color 0.5s ease, color 0.5s ease;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--glow-secondary); color: #ffffff; }
+
+.section-shell { width: min(100% - 3rem, 80rem); margin-inline: auto; }
+.technical-grid { background-image: linear-gradient(color-mix(in srgb, var(--glow-secondary) 13%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--foreground) 8%, transparent) 1px, transparent 1px); background-size: 64px 64px; mask-image: radial-gradient(ellipse at center, black 15%, transparent 78%); }
+.status-dot { display: inline-block; width: 6px; height: 6px; border-radius: 999px; background: var(--glow-secondary); box-shadow: 0 0 0 4px color-mix(in srgb, var(--glow-secondary) 14%, transparent), 0 0 16px var(--glow-secondary); animation: pulse-dot 2.4s ease-in-out infinite; }
+.scroll-line { width: 42px; height: 1px; overflow: hidden; background: var(--border); position: relative; }
+.scroll-line::after { content: ""; position: absolute; inset: 0; background: var(--foreground); transform: translateX(-100%); animation: scan 2s ease-in-out infinite; }
+.data-panel { border: 1px solid var(--border); border-radius: 1.5rem; background: color-mix(in srgb, var(--surface) 66%, transparent); box-shadow: 0 30px 90px color-mix(in srgb, var(--foreground) 7%, transparent); backdrop-filter: blur(18px); }
+.project-card { background: linear-gradient(145deg, color-mix(in srgb, var(--surface) 82%, transparent), color-mix(in srgb, var(--background) 60%, transparent)); transition: border-color .35s ease, transform .5s cubic-bezier(.22,1,.36,1), box-shadow .5s ease; }
+.project-card:hover { transform: translateY(-8px); border-color: color-mix(in srgb, var(--glow-secondary) 48%, var(--border)); box-shadow: 0 40px 90px color-mix(in srgb, var(--foreground) 9%, transparent); }
+.project-orbit { position: absolute; width: 360px; height: 360px; right: -100px; top: -100px; border: 1px solid var(--border); border-radius: 50%; transition: transform 1.2s cubic-bezier(.22,1,.36,1); }
+.project-orbit::before, .project-orbit::after { content: ""; position: absolute; border: 1px solid var(--border); border-radius: inherit; inset: 38px; }
+.project-orbit::after { inset: 90px; background: radial-gradient(circle at 35% 35%, color-mix(in srgb, var(--glow-secondary) 45%, transparent), transparent 65%); }
+.project-card:hover .project-orbit { transform: rotate(38deg) scale(1.08); }
+.repo-arrow { color: var(--glow-secondary); transition: transform .3s ease; }
+.project-card:hover .repo-arrow { transform: translate(3px, -3px); }
+.timeline-row { transition: padding .35s ease, background .35s ease; }
+.timeline-row:hover { padding-inline: 1.25rem; background: color-mix(in srgb, var(--surface) 45%, transparent); }
+.contact-link { text-decoration: none; background: linear-gradient(90deg, var(--foreground) 0 48%, var(--glow-secondary) 52% 100%); background-size: 210% 100%; background-position: 0; background-clip: text; color: transparent; transition: background-position .7s cubic-bezier(.22,1,.36,1); }
+.contact-link:hover { background-position: -100% 0; }
+.pill-link { border: 1px solid var(--border); border-radius: 999px; padding: .75rem 1.25rem; font-size: .75rem; transition: transform .25s ease, background .25s ease; }
+.pill-link:hover { transform: translateY(-3px); background: var(--foreground); color: var(--background); }
+.portrait-wrap { transform: rotate(1.5deg); }
+.portrait-frame { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 1.25rem; border: 1px solid var(--border); background-color: var(--surface); background-position: center; background-size: cover; box-shadow: 18px 18px 0 color-mix(in srgb, var(--glow-secondary) 80%, transparent); }
+.portrait-image { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 38%; }
+.portrait-frame::before { content: ""; position: absolute; z-index: 1; inset: 0; pointer-events: none; background: linear-gradient(135deg, transparent 68%, color-mix(in srgb, var(--glow-secondary) 18%, transparent)); mix-blend-mode: screen; }
+.personality-layer { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.page-mark { position: absolute; z-index: 0; }
+.easter-egg { display: flex; align-items: center; gap: 12px; color: var(--foreground); opacity: .52; font-family: monospace; font-size: 9px; line-height: 1.6; letter-spacing: .16em; text-shadow: 0 0 20px color-mix(in srgb, var(--glow-secondary) 36%, transparent); transition: opacity .35s ease, transform .45s cubic-bezier(.22,1,.36,1); }
+.mark-spinner { display: grid; place-items: center; flex: none; will-change: transform; }
+.mamba-mark { top: 18%; right: 3vw; }
+.charizard-mark { top: 56%; left: 2.5vw; }
+.football-mark { top: 76%; right: 4vw; }
+.mamba-mark .easter-egg { animation: mark-float-a 6s ease-in-out infinite; }
+.charizard-mark .easter-egg { animation: mark-float-b 7.5s ease-in-out infinite; }
+.football-mark .easter-egg { animation: mark-float-a 8s ease-in-out infinite reverse; }
+.personality-svg { display: block; overflow: visible; filter: drop-shadow(0 0 12px color-mix(in srgb, var(--glow-secondary) 35%, transparent)); }
+.personality-image { display: block; width: auto; object-fit: contain; filter: drop-shadow(0 0 12px color-mix(in srgb, var(--glow-secondary) 24%, transparent)); }
+.lakers-image { height: 58px; }
+.charizard-image { height: 70px; }
+.football-svg { width: 59px; height: 38px; }
+.ambient-halo { position: absolute; border: 1px solid color-mix(in srgb, var(--glow-secondary) 20%, transparent); border-radius: 50%; box-shadow: inset 0 0 80px color-mix(in srgb, var(--glow-secondary) 6%, transparent), 0 0 80px color-mix(in srgb, var(--glow-secondary) 5%, transparent); }
+.halo-one { width: 42vw; height: 42vw; min-width: 420px; min-height: 420px; right: -18vw; top: -12vw; }
+.halo-one::before, .halo-two::before { content: ""; position: absolute; inset: 12%; border: 1px dashed color-mix(in srgb, var(--foreground) 12%, transparent); border-radius: inherit; animation: orbit-spin 38s linear infinite; }
+.halo-two { width: 30vw; height: 30vw; min-width: 340px; min-height: 340px; left: -14vw; bottom: -12vw; }
+.coordinate-label { position: absolute; color: var(--foreground); opacity: .16; font-family: monospace; font-size: 7px; letter-spacing: .25em; writing-mode: vertical-rl; }
+.coord-one { left: 18px; top: 20%; }
+.coord-two { right: 18px; bottom: 18%; }
+.signal-scan { position: absolute; left: 0; right: 0; top: -8%; height: 18%; background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--glow-secondary) 10%, transparent), transparent); filter: blur(10px); animation: vertical-scan 11s linear infinite; }
+.particle-field { position: absolute; inset: 0; }
+.particle-field i { --x: calc((var(--i) * 47) % 97); position: absolute; left: calc(var(--x) * 1%); top: calc(((var(--i) * 31) % 91) * 1%); width: 3px; height: 3px; border-radius: 50%; background: var(--glow-secondary); box-shadow: 0 0 8px var(--glow-secondary), 0 0 18px color-mix(in srgb, var(--glow-secondary) 45%, transparent); opacity: calc(.12 + (var(--i) % 4) * .07); animation: particle-drift calc(8s + (var(--i) % 7) * 1.3s) ease-in-out infinite alternate; animation-delay: calc(var(--i) * -.7s); }
+.particle-field i:nth-child(3n) { width: 1px; height: 34px; border-radius: 0; background: linear-gradient(to bottom, transparent, var(--glow-secondary), transparent); }
+@keyframes orbit-spin { to { transform: rotate(360deg); } }
+@keyframes vertical-scan { from { transform: translateY(-15vh); } to { transform: translateY(120vh); } }
+@keyframes particle-drift { 0% { transform: translate3d(-12px, 18px, 0) scale(.7); opacity: .08; } 50% { opacity: .42; } 100% { transform: translate3d(28px, -42px, 0) scale(1.25); opacity: .18; } }
+@keyframes mark-float-a { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
+@keyframes mark-float-b { 0%, 100% { translate: 0 0; } 50% { translate: 8px -7px; } }
+
+@keyframes pulse-dot { 50% { opacity: .45; transform: scale(.75); } }
+@keyframes scan { 0% { transform: translateX(-100%); } 60%, 100% { transform: translateX(100%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  body {
+    transition: none;
+  }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+}
+
+@media (min-width: 640px) { .section-shell { width: min(100% - 5rem, 80rem); } }
+
+/* Slow, ambient idle motion for the gradient-mesh background blobs. */
+@keyframes drift-slow {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(3%, -4%) scale(1.05); }
+}
+
+@keyframes drift-medium {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-4%, 3%) scale(0.97); }
+}
+
+.animate-drift-slow {
+  animation: drift-slow 26s ease-in-out infinite;
+}
+
+.animate-drift-medium {
+  animation: drift-medium 20s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-drift-slow,
+  .animate-drift-medium {
+    animation: none;
+  }
 }

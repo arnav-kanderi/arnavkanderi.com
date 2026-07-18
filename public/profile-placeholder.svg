@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000">
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1">
+      <stop stop-color="#151517"/>
+      <stop offset="1" stop-color="#080809"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="80%" cy="20%" r="70%">
+      <stop stop-color="#d71920" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#d71920" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <rect width="800" height="1000" fill="url(#glow)"/>
+  <g fill="none" stroke="#fff" stroke-opacity=".08">
+    <path d="M0 200h800M0 400h800M0 600h800M0 800h800"/>
+    <path d="M200 0v1000M400 0v1000M600 0v1000"/>
+  </g>
+  <circle cx="400" cy="440" r="142" fill="#f3f0ed" fill-opacity=".06" stroke="#f3f0ed" stroke-opacity=".18"/>
+  <path d="M170 920c18-188 102-282 230-282s212 94 230 282" fill="#f3f0ed" fill-opacity=".06" stroke="#f3f0ed" stroke-opacity=".18"/>
+  <text x="400" y="470" fill="#f3f0ed" fill-opacity=".58" font-family="Georgia,serif" font-size="94" text-anchor="middle">AK</text>
+  <text x="400" y="82" fill="#f3f0ed" fill-opacity=".42" font-family="monospace" font-size="13" letter-spacing="4" text-anchor="middle">PORTRAIT PLACEHOLDER</text>
+</svg>
