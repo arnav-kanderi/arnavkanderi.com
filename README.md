@@ -64,12 +64,3 @@ src/
 - The gradient-mesh background only animates `transform`/`opacity` (GPU
   compositable) and is capped to a few elements to stay cheap on mobile.
 
-## Deploying to Vercel
-
-1. Push this repo to GitHub.
-2. In Vercel, "Add New Project" → import the repo. Framework preset
-   `Next.js` is detected automatically — no config needed.
-3. Every push to `main` deploys to production; other branches get preview
-   deployments.
-
-No environment variables or backend services are required.
