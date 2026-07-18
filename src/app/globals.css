@@ -76,24 +76,29 @@ body {
 .pill-link { border: 1px solid var(--border); border-radius: 999px; padding: .75rem 1.25rem; font-size: .75rem; transition: transform .25s ease, background .25s ease; }
 .pill-link:hover { transform: translateY(-3px); background: var(--foreground); color: var(--background); }
 .portrait-wrap { transform: rotate(1.5deg); }
+.profile-separator { display: flex; align-items: center; gap: 10px; width: min(100%, 32rem); margin-block: 2.25rem 1.75rem; }
+.profile-separator::before { content: ""; width: 5px; height: 5px; flex: none; border-radius: 50%; background: var(--glow-secondary); box-shadow: 0 0 12px color-mix(in srgb, var(--glow-secondary) 60%, transparent); }
+.profile-separator span { width: 100%; height: 1px; background: linear-gradient(90deg, color-mix(in srgb, var(--glow-secondary) 42%, transparent), transparent); }
+.bio-copy { color: color-mix(in srgb, var(--foreground) 70%, transparent); font-family: var(--font-fraunces), Georgia, serif; font-size: clamp(1.02rem, 1.25vw, 1.18rem); font-weight: 400; line-height: 1.8; letter-spacing: -.008em; text-wrap: pretty; }
+.bio-copy::first-letter { color: var(--foreground); font-size: 1.12em; }
 .portrait-frame { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 1.25rem; border: 1px solid var(--border); background-color: var(--surface); background-position: center; background-size: cover; box-shadow: 18px 18px 0 color-mix(in srgb, var(--glow-secondary) 80%, transparent); }
 .portrait-image { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 38%; }
 .portrait-frame::before { content: ""; position: absolute; z-index: 1; inset: 0; pointer-events: none; background: linear-gradient(135deg, transparent 68%, color-mix(in srgb, var(--glow-secondary) 18%, transparent)); mix-blend-mode: screen; }
-.personality-layer { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.personality-layer { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
 .page-mark { position: absolute; z-index: 0; }
 .easter-egg { display: flex; align-items: center; gap: 12px; color: var(--foreground); opacity: .52; font-family: monospace; font-size: 9px; line-height: 1.6; letter-spacing: .16em; text-shadow: 0 0 20px color-mix(in srgb, var(--glow-secondary) 36%, transparent); transition: opacity .35s ease, transform .45s cubic-bezier(.22,1,.36,1); }
 .mark-spinner { display: grid; place-items: center; flex: none; will-change: transform; }
-.mamba-mark { top: 18%; right: 3vw; }
-.charizard-mark { top: 56%; left: 2.5vw; }
-.football-mark { top: 76%; right: 4vw; }
-.mamba-mark .easter-egg { animation: mark-float-a 6s ease-in-out infinite; }
+.mamba-mark { top: 18%; right: 3vw; animation: mark-float-a 6s ease-in-out infinite; }
+.charizard-mark { top: 56%; left: 2.5vw; z-index: 20; }
+.charizard-mark .mark-spinner { width: 84px; height: 84px; }
+.panthers-mark { top: 76%; right: 4vw; }
 .charizard-mark .easter-egg { animation: mark-float-b 7.5s ease-in-out infinite; }
-.football-mark .easter-egg { animation: mark-float-a 8s ease-in-out infinite reverse; }
+.panthers-mark .easter-egg { animation: mark-float-a 8s ease-in-out infinite reverse; }
 .personality-svg { display: block; overflow: visible; filter: drop-shadow(0 0 12px color-mix(in srgb, var(--glow-secondary) 35%, transparent)); }
 .personality-image { display: block; width: auto; object-fit: contain; filter: drop-shadow(0 0 12px color-mix(in srgb, var(--glow-secondary) 24%, transparent)); }
 .lakers-image { height: 58px; }
 .charizard-image { height: 70px; }
-.football-svg { width: 59px; height: 38px; }
+.panthers-image { height: 54px; }
 .ambient-halo { position: absolute; border: 1px solid color-mix(in srgb, var(--glow-secondary) 20%, transparent); border-radius: 50%; box-shadow: inset 0 0 80px color-mix(in srgb, var(--glow-secondary) 6%, transparent), 0 0 80px color-mix(in srgb, var(--glow-secondary) 5%, transparent); }
 .halo-one { width: 42vw; height: 42vw; min-width: 420px; min-height: 420px; right: -18vw; top: -12vw; }
 .halo-one::before, .halo-two::before { content: ""; position: absolute; inset: 12%; border: 1px dashed color-mix(in srgb, var(--foreground) 12%, transparent); border-radius: inherit; animation: orbit-spin 38s linear infinite; }
@@ -101,6 +106,38 @@ body {
 .coordinate-label { position: absolute; color: var(--foreground); opacity: .16; font-family: monospace; font-size: 7px; letter-spacing: .25em; writing-mode: vertical-rl; }
 .coord-one { left: 18px; top: 20%; }
 .coord-two { right: 18px; bottom: 18%; }
+.scroll-signal { position: absolute; right: 11px; top: 16%; width: 1px; height: 68%; background: color-mix(in srgb, var(--foreground) 10%, transparent); }
+.scroll-signal i { position: absolute; inset: 0; display: block; transform-origin: top; background: linear-gradient(to bottom, var(--glow-secondary), color-mix(in srgb, var(--glow-secondary) 25%, transparent)); box-shadow: 0 0 12px color-mix(in srgb, var(--glow-secondary) 55%, transparent); }
+.tracking-node { position: absolute; left: 0; top: 0; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid color-mix(in srgb, var(--glow-secondary) 45%, transparent); border-radius: 50%; color: var(--glow-secondary); box-shadow: 0 0 30px color-mix(in srgb, var(--glow-secondary) 15%, transparent); font-family: monospace; font-size: 8px; }
+.tracking-node::before, .tracking-node::after { content: ""; position: absolute; background: color-mix(in srgb, var(--glow-secondary) 42%, transparent); }
+.tracking-node::before { width: 68px; height: 1px; }
+.tracking-node::after { width: 1px; height: 68px; }
+.node-secondary { width: 28px; height: 28px; opacity: .6; }
+.diagonal-beam { position: absolute; width: 55vw; height: 1px; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--glow-secondary) 36%, transparent), transparent); transform-origin: center; filter: drop-shadow(0 0 8px var(--glow-secondary)); opacity: .4; }
+.beam-one { top: 18%; left: -15%; transform: rotate(32deg); animation: beam-shift 9s ease-in-out infinite alternate; }
+.beam-two { bottom: 12%; right: -18%; transform: rotate(-28deg); animation: beam-shift 12s ease-in-out infinite alternate-reverse; }
+.equation-field { position: absolute; inset: 0; }
+.quant-equation { position: absolute; display: flex; flex-direction: column; gap: 5px; color: var(--foreground); opacity: .16; white-space: nowrap; text-shadow: 0 0 22px color-mix(in srgb, var(--glow-secondary) 20%, transparent); }
+.quant-equation span { color: var(--glow-secondary); font-family: monospace; font-size: 6px; letter-spacing: .24em; }
+.quant-equation strong { font-family: var(--font-fraunces), Georgia, serif; font-size: clamp(12px, 1.25vw, 18px); font-weight: 400; letter-spacing: .015em; }
+.quant-equation small { font-family: monospace; font-size: clamp(6px, .55vw, 8px); letter-spacing: .04em; color: var(--muted); }
+.equation-bs-pde { left: 4%; top: 10%; }
+.equation-gbm { right: 3%; top: 25%; }
+.equation-risk-neutral { left: 26%; top: 39%; }
+.equation-ito { left: 5%; top: 52%; }
+.equation-ou { left: 18%; top: 65%; }
+.equation-call { right: 2%; top: 76%; }
+.equation-greeks { left: 18%; top: 91%; }
+@media (max-width: 700px) {
+  .quant-equation { opacity: .12; }
+  .equation-bs-pde { left: 4%; top: 14%; }
+  .equation-gbm { right: -12%; top: 35%; }
+  .equation-ito { left: -8%; top: 58%; }
+  .equation-call { right: -42%; top: 76%; }
+  .equation-greeks { display: none; }
+  .equation-risk-neutral { left: 4%; top: 44%; }
+  .equation-ou { display: none; }
+}
 .signal-scan { position: absolute; left: 0; right: 0; top: -8%; height: 18%; background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--glow-secondary) 10%, transparent), transparent); filter: blur(10px); animation: vertical-scan 11s linear infinite; }
 .particle-field { position: absolute; inset: 0; }
 .particle-field i { --x: calc((var(--i) * 47) % 97); position: absolute; left: calc(var(--x) * 1%); top: calc(((var(--i) * 31) % 91) * 1%); width: 3px; height: 3px; border-radius: 50%; background: var(--glow-secondary); box-shadow: 0 0 8px var(--glow-secondary), 0 0 18px color-mix(in srgb, var(--glow-secondary) 45%, transparent); opacity: calc(.12 + (var(--i) % 4) * .07); animation: particle-drift calc(8s + (var(--i) % 7) * 1.3s) ease-in-out infinite alternate; animation-delay: calc(var(--i) * -.7s); }
@@ -108,6 +145,7 @@ body {
 @keyframes orbit-spin { to { transform: rotate(360deg); } }
 @keyframes vertical-scan { from { transform: translateY(-15vh); } to { transform: translateY(120vh); } }
 @keyframes particle-drift { 0% { transform: translate3d(-12px, 18px, 0) scale(.7); opacity: .08; } 50% { opacity: .42; } 100% { transform: translate3d(28px, -42px, 0) scale(1.25); opacity: .18; } }
+@keyframes beam-shift { from { translate: -8vw -3vh; opacity: .12; } to { translate: 18vw 12vh; opacity: .48; } }
 @keyframes mark-float-a { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
 @keyframes mark-float-b { 0%, 100% { translate: 0 0; } 50% { translate: 8px -7px; } }
 

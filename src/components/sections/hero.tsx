@@ -78,7 +78,6 @@ export function Hero() {
         </motion.div>
       </motion.div>
       <motion.div variants={item} className="absolute bottom-7 left-6 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[.2em] text-muted sm:left-10 lg:left-16"><span className="scroll-line" /> Scroll to explore</motion.div>
-      <div aria-hidden="true" className="absolute bottom-7 right-6 hidden font-mono text-[10px] text-muted sm:block lg:right-16">SYS / 2026 — 001</div>
     </section>
   );
 }

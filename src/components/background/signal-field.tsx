@@ -16,6 +16,29 @@ export function SignalField() {
   const rotate = useTransform(smooth, [0, 1], [-7, 9]);
   const y = useTransform(smooth, [0, 1], [80, -120]);
   const scaleX = useTransform(smooth, [0, 1], [0.82, 1.12]);
+  const gridY = useTransform(smooth, [0, 1], [0, -96]);
+  const gridX = useTransform(smooth, [0, 1], [0, 36]);
+  const haloOneRotate = useTransform(smooth, [0, 1], [0, 210]);
+  const haloOneX = useTransform(smooth, [0, 1], [0, -150]);
+  const haloOneY = useTransform(smooth, [0, 1], [0, 110]);
+  const haloTwoRotate = useTransform(smooth, [0, 1], [0, -165]);
+  const haloTwoX = useTransform(smooth, [0, 1], [0, 125]);
+  const haloTwoY = useTransform(smooth, [0, 1], [0, -90]);
+  const nodeOneX = useTransform(smooth, [0, 1], ["8vw", "72vw"]);
+  const nodeOneY = useTransform(smooth, [0, 0.5, 1], ["72vh", "18vh", "58vh"]);
+  const nodeTwoX = useTransform(smooth, [0, 1], ["82vw", "18vw"]);
+  const nodeTwoY = useTransform(smooth, [0, 1], ["24vh", "76vh"]);
+  const eqOneX = useTransform(smooth, [0, 1], ["-12vw", "54vw"]);
+  const eqOneY = useTransform(smooth, [0, 1], [0, 80]);
+  const eqTwoX = useTransform(smooth, [0, 1], ["18vw", "-58vw"]);
+  const eqTwoY = useTransform(smooth, [0, 1], [0, -65]);
+  const eqThreeX = useTransform(smooth, [0, 1], ["-22vw", "62vw"]);
+  const eqThreeY = useTransform(smooth, [0, 1], [0, -95]);
+  const eqFourX = useTransform(smooth, [0, 1], ["22vw", "-55vw"]);
+  const eqFourY = useTransform(smooth, [0, 1], [0, 75]);
+  const eqFiveX = useTransform(smooth, [0, 1], ["-18vw", "48vw"]);
+  const eqSixX = useTransform(smooth, [0, 1], ["10vw", "-48vw"]);
+  const eqSevenX = useTransform(smooth, [0, 1], ["-8vw", "62vw"]);
 
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-[5] overflow-hidden opacity-60">
@@ -46,9 +69,23 @@ export function SignalField() {
           />
         ))}
       </motion.svg>
-      <div className="absolute inset-0 technical-grid opacity-[0.18]" />
-      <div className="ambient-halo halo-one" />
-      <div className="ambient-halo halo-two" />
+      <motion.div style={reduced ? undefined : { x: gridX, y: gridY }} className="absolute -inset-24 technical-grid opacity-[0.24]" />
+      <motion.div style={reduced ? undefined : { x: haloOneX, y: haloOneY, rotate: haloOneRotate }} className="ambient-halo halo-one" />
+      <motion.div style={reduced ? undefined : { x: haloTwoX, y: haloTwoY, rotate: haloTwoRotate }} className="ambient-halo halo-two" />
+      <motion.div style={reduced ? undefined : { x: nodeOneX, y: nodeOneY }} className="tracking-node"><span>α</span></motion.div>
+      <motion.div style={reduced ? undefined : { x: nodeTwoX, y: nodeTwoY }} className="tracking-node node-secondary"><span>β</span></motion.div>
+      <div className="scroll-signal"><motion.i style={reduced ? undefined : { scaleY: smooth }} /></div>
+      <div className="diagonal-beam beam-one" />
+      <div className="diagonal-beam beam-two" />
+      <div className="equation-field">
+        <motion.div style={reduced ? undefined : { x: eqOneX, y: eqOneY }} className="quant-equation equation-bs-pde"><span>BLACK–SCHOLES / PDE</span><strong>∂V/∂t + ½σ²S² ∂²V/∂S² + rS ∂V/∂S − rV = 0</strong></motion.div>
+        <motion.div style={reduced ? undefined : { x: eqTwoX, y: eqTwoY }} className="quant-equation equation-gbm"><span>GEOMETRIC BROWNIAN MOTION</span><strong>dSₜ = μSₜdt + σSₜdWₜ</strong></motion.div>
+        <motion.div style={reduced ? undefined : { x: eqThreeX, y: eqThreeY }} className="quant-equation equation-ito"><span>ITÔ / LEMMA</span><strong>df = (fₜ + μSfₛ + ½σ²S²fₛₛ)dt + σSfₛdWₜ</strong></motion.div>
+        <motion.div style={reduced ? undefined : { x: eqFourX, y: eqFourY }} className="quant-equation equation-call"><span>EUROPEAN CALL / CLOSED FORM</span><strong>C = S₀Φ(d₁) − Ke⁻ʳᵀΦ(d₂)</strong><small>d₁ = [ln(S₀/K) + (r + ½σ²)T] / σ√T · d₂ = d₁ − σ√T</small></motion.div>
+        <motion.div style={reduced ? undefined : { x: eqFiveX }} className="quant-equation equation-greeks"><span>SENSITIVITY / GREEKS</span><strong>Δ = Φ(d₁) &nbsp; Γ = φ(d₁)/(Sσ√T)</strong><small>ν = Sφ(d₁)√T · Θ = −Sφ(d₁)σ/(2√T) − rKe⁻ʳᵀΦ(d₂)</small></motion.div>
+        <motion.div style={reduced ? undefined : { x: eqSixX }} className="quant-equation equation-risk-neutral"><span>RISK-NEUTRAL VALUATION</span><strong>V₀ = e⁻ʳᵀ 𝔼^Q[H(Sₜ)]</strong></motion.div>
+        <motion.div style={reduced ? undefined : { x: eqSevenX }} className="quant-equation equation-ou"><span>MEAN REVERSION / ORNSTEIN–UHLENBECK</span><strong>dXₜ = θ(μ − Xₜ)dt + σdWₜ</strong></motion.div>
+      </div>
       <div className="signal-scan" />
       <div className="particle-field">
         {Array.from({ length: 18 }, (_, index) => (

@@ -17,7 +17,8 @@ export function PortfolioSections() {
           <h2 className="max-w-4xl font-serif text-4xl leading-[1.08] tracking-[-0.035em] sm:text-6xl lg:text-7xl">
             I like problems where <em className="font-normal text-muted">mathematics meets uncertainty.</em>
           </h2>
-          <p className="mt-8 max-w-2xl text-base leading-8 text-muted sm:text-lg">{site.bio}</p>
+          <div className="profile-separator" aria-hidden="true"><span /></div>
+          <p className="bio-copy max-w-xl">{site.bio}</p>
         </Reveal>
         <Reveal delay={0.15} className="lg:justify-self-end">
           <div className="portrait-wrap w-full max-w-md">
