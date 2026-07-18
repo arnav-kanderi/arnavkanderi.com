@@ -1,7 +1,7 @@
 # arnavkanderi.com
 
 Personal portfolio site. Next.js (App Router) + TypeScript + Tailwind CSS,
-animated with Framer Motion. Fully static — no backend or database.
+animated with Framer Motion. 
 
 ## Stack
 
