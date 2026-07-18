@@ -21,7 +21,7 @@ export function PersonalityMarks() {
   const smooth = useSpring(scrollYProgress, { stiffness: 65, damping: 24, mass: 0.45 });
   const mambaRotate = useTransform(smooth, [0, 1], [3, 183]);
   const charizardRotate = useTransform(smooth, [0, 1], [-4, -144]);
-  const panthersRotate = useTransform(smooth, [0, 1], [6, 96]);
+  const panthersRotate = useTransform(smooth, [0, 1], [4, 164]);
 
   return <div aria-hidden="true" className="personality-layer">
     <div className="page-mark mamba-mark"><motion.span className="mark-spinner" style={reduced ? undefined : { rotate: mambaRotate }}><LakersMark /></motion.span></div>

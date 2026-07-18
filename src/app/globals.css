@@ -88,17 +88,19 @@ body {
 .page-mark { position: absolute; z-index: 0; }
 .easter-egg { display: flex; align-items: center; gap: 12px; color: var(--foreground); opacity: .52; font-family: monospace; font-size: 9px; line-height: 1.6; letter-spacing: .16em; text-shadow: 0 0 20px color-mix(in srgb, var(--glow-secondary) 36%, transparent); transition: opacity .35s ease, transform .45s cubic-bezier(.22,1,.36,1); }
 .mark-spinner { display: grid; place-items: center; flex: none; will-change: transform; }
-.mamba-mark { top: 18%; right: 3vw; animation: mark-float-a 6s ease-in-out infinite; }
+.mamba-mark { top: 27%; right: 1.75vw; animation: mark-float-a 6s ease-in-out infinite; }
 .charizard-mark { top: 56%; left: 2.5vw; z-index: 20; }
 .charizard-mark .mark-spinner { width: 84px; height: 84px; }
-.panthers-mark { top: 76%; right: 4vw; }
+.panthers-mark { top: 76%; right: 1vw; }
+.panthers-mark .mark-spinner { width: 88px; height: 70px; }
+.panthers-mark .easter-egg { gap: 16px; }
 .charizard-mark .easter-egg { animation: mark-float-b 7.5s ease-in-out infinite; }
 .panthers-mark .easter-egg { animation: mark-float-a 8s ease-in-out infinite reverse; }
 .personality-svg { display: block; overflow: visible; filter: drop-shadow(0 0 12px color-mix(in srgb, var(--glow-secondary) 35%, transparent)); }
 .personality-image { display: block; width: auto; object-fit: contain; filter: drop-shadow(0 0 12px color-mix(in srgb, var(--glow-secondary) 24%, transparent)); }
 .lakers-image { height: 58px; }
 .charizard-image { height: 70px; }
-.panthers-image { height: 54px; }
+.panthers-image { height: 42px; }
 .ambient-halo { position: absolute; border: 1px solid color-mix(in srgb, var(--glow-secondary) 20%, transparent); border-radius: 50%; box-shadow: inset 0 0 80px color-mix(in srgb, var(--glow-secondary) 6%, transparent), 0 0 80px color-mix(in srgb, var(--glow-secondary) 5%, transparent); }
 .halo-one { width: 42vw; height: 42vw; min-width: 420px; min-height: 420px; right: -18vw; top: -12vw; }
 .halo-one::before, .halo-two::before { content: ""; position: absolute; inset: 12%; border: 1px dashed color-mix(in srgb, var(--foreground) 12%, transparent); border-radius: inherit; animation: orbit-spin 38s linear infinite; }
