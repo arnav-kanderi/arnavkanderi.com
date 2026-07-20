@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider, themeInitScript } from "@/components/theme/theme-provider";
-import { site } from "@/data/site";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -17,8 +16,18 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: `${site.name} — ${site.headline}`,
-  description: site.bio,
+  metadataBase: new URL("https://arnavkanderi.com"),
+  title: "Arnav Kanderi | Mathematics, Computer Science & Quantitative Finance",
+  description:
+    "Arnav Kanderi is a high school senior in Waxhaw, NC working at the intersection of mathematics, code, and markets.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Arnav Kanderi",
+    description: "Mathematics, computer science, and quantitative finance.",
+    url: "https://arnavkanderi.com",
+    siteName: "Arnav Kanderi",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
