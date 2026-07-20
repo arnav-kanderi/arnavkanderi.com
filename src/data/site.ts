@@ -19,7 +19,7 @@ export const site = {
     "Building quantitative finance projects",
   ],
   highlights: [
-    { label: "Class rank", value: "1" },
+    { label: "Class rank", value: "1/499" },
     { label: "Coursework", value: "Through linear algebra" },
     { label: "Research", value: "UNC Wilmington SIPS Lab" },
     { label: "FBLA", value: "National champion" },
@@ -32,3 +32,4 @@ export const site = {
     resumeHref: "/resume.pdf",
   },
 };
+//
